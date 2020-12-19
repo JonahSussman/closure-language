@@ -1,0 +1,13 @@
+# Generates random number from min to max, excluding max
+fn _Rand() {
+  let _seed = clock() % 2147483648
+
+  fn gen(min, max) {
+    _seed = (1664525 * _seed + 1013904223) % 2147483648
+    return (_seed % (max - min)) + min
+  }
+
+  return gen
+}
+
+let rand = _Rand()

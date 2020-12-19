@@ -1,0 +1,25 @@
+import _list
+import _rand
+
+let list = List()
+list('push')(1)(2)(3)
+
+print list('repr')
+
+list('set')(1, 4)
+print list('repr')
+
+print list('pop')
+print list('pop')
+print list('repr')
+
+let a = List()
+let i = 0
+while (i < 10) {
+  a('push')(rand(0, 10))
+  i = i + 1
+}
+
+print a('repr')
+bad_sort(a)
+print a('repr')

@@ -1,0 +1,174 @@
+# Basic OOP-Like linked-list
+fn Node(value) {
+  let next = nil
+  let prev = nil
+
+  fn attr(id) {
+    if (id == 'value') return value
+    if (id == 'next')  return next
+    if (id == 'prev')  return prev
+
+    if (id == 'set_value') return set_value
+    if (id == 'set_next')  return set_next
+    if (id == 'set_prev')  return set_prev
+
+    print 'invalid attribute ' + id
+    return nil
+  }
+
+  fn set_value(new_value) {
+    value = new_value
+  }
+  fn set_next(new_next) {
+    next = new_next
+  }
+  fn set_prev(new_prev) {
+    prev = new_prev
+  }
+
+  return attr
+}
+
+fn List() {
+  let head = nil
+  let tail = nil
+  let length = 0
+
+  fn attr(id) {
+    if (id == 'head')   return head
+    if (id == 'tail')   return tail
+    if (id == 'length') return length
+
+    if (id == 'push')   return push
+    if (id == 'get')    return get
+    if (id == 'set')    return set
+    if (id == 'pop')    return pop()
+    if (id == 'has')    return has
+    if (id == 'repr')   return repr()
+
+    print 'unknown attribute ' + id
+    return nil
+  }
+
+  fn push(value) {
+    let node = Node(value)
+
+    if (head == nil) {
+      head = node
+      tail = node
+    } else {
+      node('set_prev')(tail)
+      tail('set_next')(node)
+      tail = node
+    }
+
+    length = length + 1
+
+    return push
+  }
+
+  fn get(pos) {
+    let node_check = head
+    let curr_pos   = 0
+
+    while (curr_pos != pos) {
+      node_check = node_check('next')
+      curr_pos = curr_pos + 1
+    }
+
+    return node_check('value')
+  }
+
+  fn set(pos, new_value) {
+    let node = head
+    let curr_pos = 0
+
+    while (curr_pos != pos) {
+      node = node('next')
+      curr_pos = curr_pos + 1
+    }
+
+    node('set_value')(new_value)
+  }
+  
+  fn pop() {
+    if (tail == nil) {
+      return nil
+    }
+    
+    let node = tail
+    let prev = node('prev')
+    tail = prev
+    
+    if (prev != nil) {
+      prev('set_next')(nil)
+    } else {
+      head = nil
+    }
+    
+    length = length - 1
+    return node('value')
+  }
+
+  fn has(value) {
+    let node = head
+    let curr_pos = 0
+
+    while (curr_pos != length) {
+      if (node('value') == value) {
+        return true
+      }
+
+      node = node('next')
+      curr_pos = curr_pos + 1
+    }
+
+    return false
+  }
+
+  fn repr() {
+    let node = head
+    let curr_pos = 0
+    let output = '['
+
+    while (curr_pos != length) {
+      output = output + (node('value') -> str)
+
+      node = node('next')
+      curr_pos = curr_pos + 1
+
+      if (curr_pos != length) output = output + ', '
+    }
+
+    return output + ']'
+  }
+
+  return attr
+}
+
+fn bad_sort(_list) {
+  let sorted = false
+  let l = _list('length')
+
+  while (~sorted) {
+    let i = 0
+    let current_node = _list('head')
+    sorted = true
+
+    while (i < l - 1) {
+      let next_node = current_node('next')
+      let left = current_node('value')
+      let right = next_node('value')
+
+      if (left > right) {
+        sorted = false
+
+        next_node('set_value')(left)
+        current_node('set_value')(right)
+      }
+
+      current_node = next_node
+      i = i + 1
+    }
+  }
+}

@@ -1,0 +1,12 @@
+let max = input 'Fibonacci numbers lower than? '
+max = max -> num
+
+let a = 0
+let b = 1
+
+while (a < max) {
+  print a
+  let temp = a
+  a = b
+  b = temp + b
+}

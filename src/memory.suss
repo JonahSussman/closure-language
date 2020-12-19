@@ -1,0 +1,52 @@
+import _list
+
+let n = input 'How many terms do you wish to memorize? '
+n = n -> num
+
+let terms = List()
+let defs  = List()
+let guess = List()
+
+let i = 0
+while (i < n) {
+  terms('push')(input('Term ' + ((i + 1) -> str) + '? '))
+  defs('push')(input('Definition of ' + terms('get')(terms('length') - 1) + '? '))
+  guess('push')('')
+  i = i + 1
+}
+
+i = 0
+while (i < n) {
+  print 'The definition of ' + terms('get')(i) + ' is ' + defs('get')(i)
+  i = i + 1
+}
+
+input 'Press ENTER when you are ready'
+
+i = 0
+while (i < 80) {
+  print ''
+  i = i + 1
+}
+
+i = 0
+while (i < n) {
+  guess('set')(i, (input('Input the term that has the defintion of ' + terms('get')(i) + ': ')))
+  i = i + 1
+}
+
+i = 0
+let score = 0
+while (i < n) {
+  if (guess('get')(i) != defs('get')(i)) {
+    print(terms('get')(i) + ' means ' + defs('get')(i))
+  } else {
+    score = score + 1
+  }
+
+  i = i + 1
+}
+
+score = score -> str
+n = n -> str
+print 'You got ' + score + '/' + n

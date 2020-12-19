@@ -1,0 +1,23 @@
+import _rand
+
+fn guesser(x) {
+  let guess = -1
+
+  while(guess != x) {
+    guess = input 'Guess? '
+    guess = guess -> num
+
+    if(guess == x) {
+      print 'you got it!'
+      return
+    } else if (guess < x) {
+      print 'Higher!'
+    } else if (guess > x) {
+      print 'Lower!'
+    }
+  }
+}
+
+print 'I am guessing a number between 1 and 100.'
+
+guesser(rand(1, 100))

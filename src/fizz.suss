@@ -1,0 +1,33 @@
+let max = input 'Fizzbuzz till what number? '
+max = max -> num
+
+let i = 1
+while (i <= max) {
+  let fizz = false
+  let buzz = false
+
+  if (i % 3 == 0) {
+    fizz = true
+  }
+
+  if (i % 5 == 0) {
+    buzz = true
+  }
+
+  let output = ''
+  if (~fizz and ~buzz) {
+    output = i
+  } else {
+    if (fizz) {
+      output = output + 'fizz'
+    }
+
+    if (buzz) {
+      output = output + 'buzz'
+    }
+  }
+
+  print output
+
+  i = i + 1
+}

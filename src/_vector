@@ -1,0 +1,38 @@
+# Pseudo-OOP with functions and closures
+fn Vector(x, y) {
+  fn attr(id) {
+    # Variable declarations
+    if (id == 'x') return x
+    if (id == 'y') return y
+
+    # Variable setter functions
+    if (id == 'set_x') return set_x
+    if (id == 'set_y') return set_y
+
+    # Functions that act on data
+    if (id == 'length') return length()
+    if (id == 'add') return add
+
+    return 'unknown attribute ' + id
+  }
+
+  fn set_x(new_x) {
+    x = new_x
+  }
+  fn set_y(new_y) {
+    y = new_y
+  }
+
+  fn length() {
+    return sqrt(x^2 + y^2)
+  }
+  fn add(other) {
+    return Vector(x + other('x'), y + other('y'))
+  }
+
+  return attr
+}
+
+let test = Vector(2, 3)('add')(Vector(3, 4))
+print (test('x') -> str) + ', ' + (test('y') -> str)
+print test('length')
